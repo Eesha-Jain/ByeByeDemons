@@ -24,33 +24,35 @@
       <div class="form">
         <p>Click on the "Choose File" button to upload your word document:</p>
         <br />
-        <form id="inputform">
-          <input type="file" id="docpicker" accept=".docx" required>
-          <input type="submit">
+        <form id="finalForms">
+          <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+          <input type="submit" />
         </form>
       </div>
 
       <div class="contains">
       </div>
     </div>
+
+    <!--
+    https://bgrins.github.io/filereader.js/
+    https://raw.githubusercontent.com/bgrins/filereader.js/master/filereader.js
+    https://stackoverflow.com/questions/16505333/get-the-data-of-uploaded-file-in-javascript
+    -->
     
     <script>
-      var form = document.getElementById('inputform');
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        var docEle = document.getElementById('docpicker');
-
-        fetch("/getDemons", {
-          method: "POST",
-          body: JSON.stringify({
-            doc: docEle
-          }),
-          headers: {"Content-Type": "application/json"}
-        })
-        .then(req => req.json())
-        .then(res => {
-          alert("done");
-        }).catch(e => alert(e));
+      const form = document.getElementById('finalForms');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        FileReaderJS.setupInput(document.getElementById('docpicker'), {
+          readAsDefault: "DataURL",
+          on: {
+            load: function(e, file) {
+              console.log(e.target.result);
+            }
+          }
+        });
       });
     </script>
 

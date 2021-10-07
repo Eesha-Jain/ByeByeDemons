@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "docxtemplater": "^3.25.4",
     "express": "^4.17.1",
+    "file-system": "^2.2.2",
     "node": "^16.10.0",
+    "node-stream-zip": "^1.15.0",
     "npm": "^7.24.2",
-    "path": "^0.12.7",
-    "pizzip": "^3.1.1"
+    "path": "^0.12.7"
   }
 }
