@@ -1,0 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 232, 230);
+  font-family: 'Roboto', sans-serif;
+  min-height: 100%;
+}
+
+::-moz-selection {
+  background-color: #92dbf8;
+}
+
+::selection {
+  background-color: #92dbf8;
+}
+
+.top {
+  text-align: center;
+  background-color: rgb(255, 172, 172);
+  padding: 10px;
+}
+
+h1, h4, p {
+  margin: 0;
+  padding: 0;
+}
+
+.pageContent {
+  padding: 10px;
+}
+
+.footer {
+  color: white;
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer p {
+  font-weight: 300;
+  text-align: center;
+  font-size: 12px;
+}
