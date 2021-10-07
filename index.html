@@ -24,36 +24,21 @@
       <div class="form">
         <p>Click on the "Choose File" button to upload your word document:</p>
         <br />
-        <form id="finalForms">
-          <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
-          <input type="submit" />
-        </form>
+        <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
       </div>
 
-      <div class="contains">
+      <div id="output">
       </div>
     </div>
-
-    <!--
-    https://bgrins.github.io/filereader.js/
-    https://raw.githubusercontent.com/bgrins/filereader.js/master/filereader.js
-    https://stackoverflow.com/questions/16505333/get-the-data-of-uploaded-file-in-javascript
-    -->
     
     <script>
-      const form = document.getElementById('finalForms');
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        
-        FileReaderJS.setupInput(document.getElementById('docpicker'), {
-          readAsDefault: "DataURL",
-          on: {
-            load: function(e, file) {
-              console.log(e.target.result);
-            }
-          }
-        });
-      });
+      document.getElementById('docpicker').addEventListener('change', function() {     
+        var fr = new FileReader();
+        fr.onload = function(){
+          document.getElementById('output').textContent = fr.result;
+        }
+        fr.readAsBinaryString(this.files[0]);
+      })
     </script>
 
     <div class="footer">
