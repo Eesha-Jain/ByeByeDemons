@@ -1,9 +1,8 @@
 let express = require('express');
 let app = express();
-var path = require('path');
 
+app.use('/css',express.static(__dirname +'/css'));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', function (req, res) {
   res.sendFile('/index.html', {root:'.'});
