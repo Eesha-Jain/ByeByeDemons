@@ -39,6 +39,18 @@
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         var docEle = document.getElementById('docpicker');
+
+        fetch("/getDemons", {
+          method: "POST",
+          body: JSON.stringify({
+            doc: docEle
+          }),
+          headers: {"Content-Type": "application/json"}
+        })
+        .then(req => req.json())
+        .then(res => {
+          alert("done");
+        }).catch(e => alert(e));
       });
     </script>
 
