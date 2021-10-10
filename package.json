@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "child_process": "^1.0.2",
     "express": "^4.17.1",
     "file-system": "^2.2.2",
     "node": "^16.10.0",
     "node-stream-zip": "^1.15.0",
     "npm": "^7.24.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "word-extractor": "^1.0.4"
   }
 }

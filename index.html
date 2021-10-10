@@ -24,7 +24,11 @@
       <div class="form">
         <p>Click on the "Choose File" button to upload your word document:</p>
         <br />
-        <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+
+        <form id="form">
+          <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+          <input type="submit" />
+        </form>
       </div>
 
       <div id="output">
@@ -32,13 +36,15 @@
     </div>
     
     <script>
-      document.getElementById('docpicker').addEventListener('change', function() {     
-        var fr = new FileReader();
-        fr.onload = function(){
-          document.getElementById('output').textContent = fr.result;
-        }
-        fr.readAsBinaryString(this.files[0]);
-      })
+      document.getElementById("form").addEventListener('submit', function(event) { 
+        event.preventDefault();
+
+         fetch("/readDemons")
+        .then(req => req.json())
+        .then(res => {
+          console.log(res.data);
+        }).catch(e => alert(e));
+      });
     </script>
 
     <div class="footer">
