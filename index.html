@@ -26,7 +26,7 @@
         <br />
 
         <form id="form" action="/fileupload" method="post" enctype="multipart/form-data">
-          <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+          <input type="file" id="docpicker" accept=".docx" required />
           <input type="submit" />
         </form>
       </div>
@@ -35,25 +35,6 @@
       </div>
     </div>
     
-    <script>
-      document.getElementById("form").addEventListener('submit', function(event) { 
-        event.preventDefault();
-
-        fetch("/readDemons")
-          .then(req => req.json())
-          .then(res => {
-            var list = res.data;
-            console.log(list);
-            
-            fetch("/readDoc")
-              .then(req => req.json())
-              .then(res => {
-                console.log(res.data);
-              }).catch(e => alert(e));
-          }).catch(e => alert(e));
-        });
-    </script>
-
     <div class="footer">
       <p>Created by Eesha Jain</p>
     </div>
