@@ -28,13 +28,90 @@ app.post('/fileupload', upload.single('avatar'), async function (req, res, next)
 
   await pythonProcess.stdout.on('data', async (data) => {
     var demons = data.toString();
+    var arr = demons.split(", ");
 
     //Read uploaded doc
-    var result = await mammoth.extractRawText({path: req.file.path});
+    var result=await mammoth.extractRawText({path: req.file.path});
     var text = result.value;
+    var string = "";
 
-    //Return
-    return res.status(200).send(JSON.stringify({demon: demons, docContent: text}))
+    for (var d of arr) {
+      var demon = d.split("'")[1];
+      if (text.includes(demon)) {
+        string += demon + ", ";
+      }
+    }
+
+    string = string.substring(0, string.length - 2);
+
+    if (string.length > 0) {
+    return res.send(
+      `<html>
+        <head>
+          <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width"/>
+          <title>ByeByeDemons</title>
+          <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link rel="icon" href="https://www.logolynx.com/images/logolynx/67/676d0c0b4913175891bd85ade24112ae.png"/>
+          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"/>
+        </head>
+        <body>
+          <div class="top">
+            <h1>Bye Bye Demons</h1>
+            <img src="https://www.logolynx.com/images/logolynx/67/676d0c0b4913175891bd85ade24112ae.png" width="50px" height="50px" />
+            <br />
+            <br />
+            <h4>Upload your Word Document and Find Ms. Boness Demon Words</h4>
+          </div>
+
+          <div class="pageContent">
+            <p style="color: red;">You have included demon words! This is what they are: </p>
+            <p style="color: red;">${string}</p>
+          </div>
+          
+          <div class="footer">
+            <p>Created by Eesha Jain</p>
+          </div>
+        </body>
+      </html>`
+    );
+    } else {
+    return res.send(
+      `<html>
+        <head>
+          <meta charset="utf-8"/>
+          <meta name="viewport" content="width=device-width"/>
+          <title>ByeByeDemons</title>
+          <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link rel="icon" href="https://www.logolynx.com/images/logolynx/67/676d0c0b4913175891bd85ade24112ae.png"/>
+          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet"/>
+        </head>
+        <body>
+          <div class="top">
+            <h1>Bye Bye Demons</h1>
+            <img src="https://www.logolynx.com/images/logolynx/67/676d0c0b4913175891bd85ade24112ae.png" width="50px" height="50px" />
+            <br />
+            <br />
+            <h4>Upload your Word Document and Find Ms. Boness Demon Words</h4>
+          </div>
+
+          <div class="pageContent">
+            <p style="color: green;">Your paper is free of demon words! Great job!</p>
+          </div>
+          
+          <div class="footer">
+            <p>Created by Eesha Jain</p>
+          </div>
+        </body>
+      </html>`
+    );
+    }
   });
 })
 
