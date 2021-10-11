@@ -24,10 +24,9 @@ app.post('/readDoc', (req, res) => {
 app.get('/readDemons', async (req, res) => {
   const spawn = require('child_process').spawn;
   const pythonProcess = spawn('python', ['./demons.py']);
-  
+
   pythonProcess.stdout.on('data', (data) => {
-    console.log(data);
-    res.status(200).send(JSON.stringify({data: data.toString()}));
+    return res.status(200).send(JSON.stringify({data: data.toString()}));
   });
 });
 

@@ -39,7 +39,7 @@
       document.getElementById("form").addEventListener('submit', function(event) { 
         event.preventDefault();
 
-         fetch("/readDemons")
+        fetch("/readDemons")
         .then(req => req.json())
         .then(res => {
           console.log(res.data);
