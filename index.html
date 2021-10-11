@@ -25,7 +25,7 @@
         <p>Click on the "Choose File" button to upload your word document:</p>
         <br />
 
-        <form id="form">
+        <form id="form" action="/fileupload" method="post" enctype="multipart/form-data">
           <input type="file" id="docpicker" accept=".docx, .doc, application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
           <input type="submit" />
         </form>
@@ -40,11 +40,18 @@
         event.preventDefault();
 
         fetch("/readDemons")
-        .then(req => req.json())
-        .then(res => {
-          console.log(res.data);
-        }).catch(e => alert(e));
-      });
+          .then(req => req.json())
+          .then(res => {
+            var list = res.data;
+            console.log(list);
+            
+            fetch("/readDoc")
+              .then(req => req.json())
+              .then(res => {
+                console.log(res.data);
+              }).catch(e => alert(e));
+          }).catch(e => alert(e));
+        });
     </script>
 
     <div class="footer">
