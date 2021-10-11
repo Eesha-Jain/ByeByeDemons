@@ -5,14 +5,12 @@ var mammoth = require("mammoth");
 var multer = require('multer')
 
 var storage = multer.diskStorage({
-    destination: function (request, file, callback) {
-        console.log(file);
-        callback(null, './uploads/');
-    },
-    filename: function (request, file, callback) {
-        console.log(file);
-        callback(null, "uploaded")
-    }
+  destination: function (request, file, callback) {
+    callback(null, './uploads/');
+  },
+  filename: function (request, file, callback) {
+    callback(null, "uploaded")
+  }
 });
 
 var upload = multer({ storage: storage });
@@ -25,23 +23,19 @@ app.get('/', function (req, res) {
 });
 
 app.post('/fileupload', upload.single('avatar'), async function (req, res, next) {
-  var demons;
-  var text;
-
   //Get demon words
   const pythonProcess = await spawn('python', ['./python/demons.py']);
 
-  await pythonProcess.stdout.on('data', (data) => {
-    demons = data.toString();
+  await pythonProcess.stdout.on('data', async (data) => {
+    var demons = data.toString();
+
+    //Read uploaded doc
+    var result = await mammoth.extractRawText({path: req.file.path});
+    var text = result.value;
+
+    //Return
+    return res.status(200).send(JSON.stringify({demon: demons, docContent: text}))
   });
-
-  //Read uploaded doc
-  await mammoth.extractRawText({path: req.file.path}).then(function(result) {
-    text = result.value;
-  }).done();
-
-  //Return
-  return res.status(200).send(JSON.stringify({demon: demons, docContent: text}))
 })
 
 const port = process.env.PORT || 8080
