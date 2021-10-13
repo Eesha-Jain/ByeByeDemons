@@ -72,7 +72,7 @@ app.post('/fileupload', upload.single('avatar'), async function (req, res, next)
             <p style="color: red;">${string}</p>
             <br />
             <br />
-            <p style="font-size: 13px;">Warning: This program is not perfect and will find demon words within quotes. It also does not find demon words within hyphenated words such as full-time. It is your job to determine whether using a demon word is appropriate in your scenario.</p>
+            <p style="font-size: 13px;">Warning: This program will find demon words within quotes. It also does not find demon words within hyphenated words such as full-time. It is your job to determine whether using a demon word is appropriate in your scenario.</p>
           </div>
           
           <div class="footer">
