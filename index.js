@@ -37,7 +37,7 @@ app.post('/fileupload', upload.single('avatar'), async function (req, res, next)
 
     for (var d of arr) {
       var demon = d.split("'")[1];
-      if (text.includes(demon)) {
+      if (text.includes(" " + demon)) {
         string += demon + ", ";
       }
     }
@@ -70,6 +70,9 @@ app.post('/fileupload', upload.single('avatar'), async function (req, res, next)
           <div class="pageContent">
             <p style="color: red;">You have included demon words! This is what they are: </p>
             <p style="color: red;">${string}</p>
+            <br />
+            <br />
+            <p style="font-size: 13px;">Warning: This program is not perfect and will find demon words within quotes. It also does not find demon words within hyphenated words such as full-time. It is your job to determine whether using a demon word is appropriate in your scenario.</p>
           </div>
           
           <div class="footer">

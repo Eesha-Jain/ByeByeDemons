@@ -55,11 +55,3 @@ appear
 look
 show
 demonstrate
-has
-do
-be
-am
-is
-are
-was
-were
